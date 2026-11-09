@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Paper simulation for print preview */
+.a4-paper-sheet {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 18mm 20mm;
+  margin: 0 auto;
+  background: white;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 820px) {
+  .a4-paper-sheet {
+    width: 100%;
+    min-height: auto;
+    padding: 16px;
+    box-shadow: none;
+  }
+}
+
+/* Dedicated Print Styles */
+@media print {
+  @page {
+    size: A4;
+    margin: 15mm 15mm 15mm 15mm;
+  }
+
+  /* Hide all non-printable elements */
+  body {
+    background: white !important;
+    color: black !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .only-print {
+    display: block !important;
+  }
+
+  /* Print container takes full page */
+  #printable-content {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    background: white !important;
+  }
+
+  /* Prevent awkward item breaks */
+  .print-item {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    margin-bottom: 24px !important;
+  }
+
+  .print-section-header {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* Page break utility */
+  .page-break-before {
+    page-break-before: always;
+    break-before: page;
+  }
+}
